@@ -1,0 +1,31 @@
+<!--pages/reviewDetail/reviewDetail.wxml-->
+<view class='movie-card'>
+  <image class='movie-image' src='{{movieDetail.image}}'></image>
+  <view class='movie-title'>{{movieDetail.title}}</view>
+  <view class='user-info'>
+    <image class='user-head' src='{{reviewDetail.avatar}}'></image>
+    <view class='user-name'>{{reviewDetail.username}}的影评</view>
+  </view>
+  <view wx:if="{{reviewDetail.content}}" class='movie-review'>{{reviewDetail.content}}</view>
+  
+  <!-- 语音播放及停止 -->
+  <view wx:if="{{reviewDetail.audio}}">
+    <view bindtap='play' wx:if='{{isPlay==false}}' class='audio-btn'>
+      <image class='audio-image' src='/images/audio.jpeg'></image>
+      <view class='audio-duration'>{{reviewDetail.duration}} s</view>
+    </view>
+
+    <view bindtap='stop' wx:if='{{isPlay==true}}' class='audio-btn'>
+      <image class='audio-image' src='/images/audio.jpeg'></image>
+      <view class='audio-duration'>{{reviewDetail.duration}} s</view>
+    </view>
+  </view>
+  
+
+
+<!-- button：收藏影评，写影评 -->
+  <view class='opr-cnt'>
+    <view class='collent-review' bindtap='onTapCollectReview'  >收藏影评</view>
+    <view class='add-review' bindtap='onTapAddReview'>写影评</view>
+  </view>
+</view>

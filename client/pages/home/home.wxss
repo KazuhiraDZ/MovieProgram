@@ -1,0 +1,54 @@
+/* pages/home/home.wxss */
+.movie-image{
+  margin: 35rpx 80rpx;
+  width: 590rpx;
+  height: 825rpx;
+}
+.movie-title{
+  text-align: center;
+}
+.recommend-review{
+  justify-content: center;
+  margin-top: 15rpx;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.user-head{
+  flex-shrink: 0;
+  margin-left: 30rpx;
+  background: #f5e069;
+  width: 65rpx;
+  height: 65rpx;
+  border-radius: 50%;
+}
+.user-name{
+  color: lightslategray;
+  margin: 0 20rpx;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+
+.opr-cnt{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+.to-hot-movie, .to-user{
+  flex: 1;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: bold;
+}
