@@ -156,7 +156,6 @@ Page({
     qcloud.request({
       url: config.service.collectedReviewList,
       success: result => {
-        wx.hideLoading()
         let data = result.data
         // let userId = this.data.userInfo.openId
         // let myCollectedReviewList = []
@@ -169,11 +168,11 @@ Page({
         //   }
         //   console.log(myCollectedReviewList)
         //  }
-          this.setData({
-            collectedList: data.data,
-          })
-        //console.log(this.data.collectedList)
-        },
+        this.setData({
+          collectedList: data.data,
+        })
+        console.log(this.data.collectedList)
+      },
       fail: res => {
         wx.showToast({
           icon: 'none',
