@@ -7,7 +7,7 @@
     <view class='user-name'>{{reviewDetail.username}}的影评</view>
   </view>
   <view wx:if="{{reviewDetail.content}}" class='movie-review'>{{reviewDetail.content}}</view>
-  
+    
   <!-- 语音播放及停止 -->
   <view wx:if="{{reviewDetail.audio}}">
     <view bindtap='play' wx:if='{{isPlay==false}}' class='audio-btn'>

@@ -15,6 +15,14 @@
   display: flex;
   align-items: center;
 }
+.no-recommend-review{
+  justify-content: center;
+  margin-top: 15rpx;
+  font-size: 28rpx;
+  align-content: center;
+  line-height: 40rpx;
+  text-align: center;
+}
 .user-head{
   flex-shrink: 0;
   margin-left: 30rpx;

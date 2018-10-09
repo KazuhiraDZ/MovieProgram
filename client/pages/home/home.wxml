@@ -8,6 +8,10 @@
     <view class='user-name'>{{randomReview.username}}给你推荐了一部电影</view>
 </navigator>
 
+<view wx:else class='no-recommend-review'>
+  系统暂无任何电影影评
+</view>
+
 
 <view class='opr-cnt'>
   <navigator class='to-hot-movie' url='/pages/hot/hot'>热门</navigator>

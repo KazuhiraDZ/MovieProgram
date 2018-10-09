@@ -18,6 +18,7 @@ Page({
     movieId: "",
     userInfo: null,
     isPlay:false,
+    collectedList:{},
   },
 
   /**
@@ -26,6 +27,7 @@ Page({
   onLoad: function (options) {
     this.getReviewDetail(options.reviewId)
     this.getMovieDetail(options.movieId)
+    this.getMyCollectedReviewList()
   },
 
   // 点击添加review
@@ -149,42 +151,93 @@ Page({
       }
     })
   },
-
-  // 收藏review
-  onTapCollectReview(event) {
-    let review_id = this.data.reviewId
-
+  //获取我收藏的影评列表
+  getMyCollectedReviewList() {
     qcloud.request({
-      url: config.service.collectReview,
-      login: true,
-      method: 'PUT',
-      data: {
-        review_id: review_id
-      },
+      url: config.service.collectedReviewList,
       success: result => {
-        let data = result.data
-
-        if (!data.code) {
-          wx.showToast({
-            icon: 'success',
-            title: '影评收藏成功'
-          })
-        } else {
-          wx.showToast({
-            icon: 'none',
-            title: '影评收藏失败！！！'
-          })
-        }
-      },
-      fail: (res) => {
         wx.hideLoading()
-        console.log(res)
+        let data = result.data
+        // let userId = this.data.userInfo.openId
+        // let myCollectedReviewList = []
+        // if (!data.code) {
+        //   let collectedReview = data.data
+        //   for (let i = 0; i < collectedReview.length; i++) {
+        //     if (collectedReview[i].user_id == userId) {
+        //       myCollectedReviewList.push(collectedReview[i])
+        //     }
+        //   }
+        //   console.log(myCollectedReviewList)
+        //  }
+          this.setData({
+            collectedList: data.data,
+          })
+        //console.log(this.data.collectedList)
+        },
+      fail: res => {
         wx.showToast({
           icon: 'none',
-          title: '影评收藏失败'
+          title: '影评获取失败！！！'
         })
       }
     })
+  },
+  // 收藏review
+  onTapCollectReview(event) {
+    //console.log(this.data.collectedList)
+    let review_id = this.data.reviewId
+    let myCollectedReviewList = this.data.collectedList
+    //console.log('count:' + myCollectedReviewList.length)
+   
+    // 判断当前评论是否已收藏
+    let is_exist = false
+    for (let i = 0; i < myCollectedReviewList.length; i++){
+      //onsole.log(myCollectedReviewList[i])
+      if (myCollectedReviewList[i].review_id == review_id){
+        is_exist = true
+        break
+      } 
+    }
+    //console.log(review_id)
+    //console.log(is_exist)
+    if(!is_exist){
+      qcloud.request({
+        url: config.service.collectReview,
+        login: true,
+        method: 'PUT',
+        data: {
+          review_id: review_id
+        },
+        success: result => {
+          let data = result.data
+
+          if (!data.code) {
+            wx.showToast({
+              icon: 'success',
+              title: '影评收藏成功'
+            })
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '影评收藏失败！！！'
+            })
+          }
+        },
+        fail: (res) => {
+          wx.hideLoading()
+          console.log(res)
+          wx.showToast({
+            icon: 'none',
+            title: '影评收藏失败'
+          })
+        }
+      })
+    }else{
+      wx.showToast({
+        icon: 'none',
+        title: '该影评已收藏'
+      })
+    }
   },
 
   /**

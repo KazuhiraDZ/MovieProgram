@@ -10,7 +10,7 @@ module.exports = {
     ctx.state.data = {}
   },
 
-
+ 
   collectedReviewList: async ctx => {
     ctx.state.data = await DB.query("SELECT * FROM collectedReview;")
   },
